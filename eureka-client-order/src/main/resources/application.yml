@@ -1,6 +1,6 @@
 # order项目端口号
 server:
-  port: 8101
+  port: 8001
 
 spring:
   application:
@@ -9,8 +9,8 @@ spring:
 eureka:
   client:
     service-url:
-      # 当前服务注册到eureka服务地址
-      defaultZone: http://localhost:8100/eureka
+      # 当前服务注册到eureka服务地址，配置在多个eureka上要写多个地址，但是只会在一个eureka上显示，当此eureka挂了后，会在另一个显示
+      defaultZone: http://localhost:8100/eureka/,http://localhost:8101/eureka/
     # 需要将自己注册到eureka上
     register-with-eureka: true
     # 需要检索服务
