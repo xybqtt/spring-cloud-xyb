@@ -7,9 +7,12 @@ public interface IOrderService {
 
     // order调用member
     @RequestMapping("/orderToMember")
-    public String orderToMember(String name);
+    String orderToMember(String name);
 
     // order调用member
     @RequestMapping("orderToMemberUserInfo")
-    public ResponseBase orderToMemberUserInfo();
+    ResponseBase orderToMemberUserInfo();
+
+
+    ResponseBase orderInfo();
 }

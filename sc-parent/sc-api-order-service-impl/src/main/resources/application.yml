@@ -34,13 +34,25 @@ eureka:
     # 需要检索服务
     fetch-registry: true
 
-##整合Hystrix
-#feign:
-#  hystrix:
-#    enabled: true
-##设置feign客户端超时时间
+##整合Hystrix，
+## 1、添加依赖(查看sc-parent)
+## 2、添加下面配置
+## 3、查看com.xyb.api.service.impl.OrderServiceImpl的orderToMemberUserInfoHystrix()方法，添加对应方法注解
+## 4、添加对应启动类注解
+## 5、设置hystrix禁止服务超时时间(如果浏览器在超时时间内未接受到返回信息，则会调用降级方法，所以要禁止服务超时时间，使其不起作用，默认是1s)，或者将超时时间设大
+feign:
+  hystrix:
+    enabled: true
 
-##sc feign默认支持ribbon
+## hystrix禁止超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+
+##设置feign客户端超时时间，sc feign默认支持ribbon
 ribbon:
   # 建立连接所用的时间，使用网络状况正常的情况下，两端连接所用的时间。
   ReadTimeout: 5000
@@ -51,5 +63,5 @@ ribbon:
 #feign的使用查看com.xyb.feign.MemberApiFeign
 #restTemplate的使用，查看com.xyb.api.controller.OrderApiController
 #DiscoveryClient的使用，根据服务名，获取注册中心上对应服务名的信息，查看类com.xyb.api.controller.OrderApiController
-
+#hystrix断路器使用，查看本文件
 
