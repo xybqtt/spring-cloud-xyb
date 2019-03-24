@@ -1,0 +1,24 @@
+eureka:
+  client:
+    service-url:
+      ## 注册中心服务地址
+      defaultZone: http://localhost:8100/eureka
+server:
+  port: 80
+spring:
+  application:
+    ## 服务注册名称
+    name: service-zuul
+zuul:
+  routes:
+    ## 定义转发服务规则，可随便定义
+    api-a:
+      ## 当客户端发送请求127.0.0.1:80/api-memer开头的请求时，网关会转发到member服务。
+      ## 例如：http://127.0.0.1:80/api-member/getMember
+      path: /zuul-member/**
+      ## 转发的服务名
+      serviceId: member
+    api-b:
+      path: /zuul-order/**
+      serviceId: order
+

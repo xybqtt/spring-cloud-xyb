@@ -1,0 +1,31 @@
+eureka:
+  client:
+    service-url:
+      ## 注册中心服务地址
+      defaultZone: http://localhost:8100/eureka
+
+spring:
+  application:
+    ## 服务注册名称
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          ## config-server读取git的地址
+          uri: git@github.com:xybqtt/configFiles.git
+          ## 读取此文件夹下面的配置文件
+          search-paths:
+          - config
+      ## 读取的分支名称
+      label: master
+server:
+  port: 8888
+
+
+
+## 步骤
+## 1、搭建git环境
+## 2、放文件：文件名必须以这种格式放置{ConfigClient服务名-环境.properties}，举例member-dev.properties
+##    启动后，可通过http://ip:port/配置文件名查看配置文件信息
+## 3、加依赖、在主类加@EnableConfigServer注解

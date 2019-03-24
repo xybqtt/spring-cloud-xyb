@@ -1,0 +1,35 @@
+eureka:
+  client:
+    service-url:
+      ## 注册中心服务地址
+      defaultZone: http://localhost:8100/eureka
+spring:
+  application:
+    ## 服务注册名称，必须与git上的配置文件名的服务名称一样
+    name: test-configClient
+  cloud:
+    config:
+      ## 读取的版本环境
+      profile: site
+      discovery:
+        ## 读取config-server环境，config-server的服务名
+        service-id: config-server
+        ## 开启读取权限
+        enabled: true
+server:
+  port: 8882
+## 配置手动刷新，要添加actuator监控中心依赖，开启所有端点
+## 在controller上加注解@RefreshScope，调用http://ip:port/actuator/refresh的post请求后，
+## ConfigClient即可获取git上最新的配置文件
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+
+
+
+
+## 步骤
+## 1、依赖和注解
+## 3、加依赖、在主类加@EnableConfigServer注解

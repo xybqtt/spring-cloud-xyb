@@ -43,6 +43,8 @@ public class OrderServiceImpl extends BaseApiService implements IOrderService {
      * 解决服务雪崩效应，使用@HystrixCommand注解
      * @HystrixCommand 注解形式，默认开启线程池隔离、服务降级(降级调用方法fallback)、服务熔断，
      * @return
+     * 一个fallback方法只能一个用，这种方法会冗余，所以不建议这么写。而且，会将此方法内的所有代码
+     * 重新开个线程池去处理，但是只需要降级的方法去重开线程处理，占用资源多，不推荐。
      */
     @HystrixCommand(fallbackMethod = "orderToMemberUserInfoHystrixFallback")
     @RequestMapping("/orderToMemberUserInfoHystrix")
@@ -56,8 +58,16 @@ public class OrderServiceImpl extends BaseApiService implements IOrderService {
     }
 
 
+    /**
+     * 解决服务雪崩效应，使用@HystrixCommand注解方法二，更省资源，推荐使用
+     */
+    @HystrixCommand(fallbackMethod = "orderToMemberUserInfoHystrixFallback")
+    @RequestMapping("/orderToMemberUserInfoHystrixDemo2")
+    public ResponseBase orderToMemberUserInfoHystrixDemo2() {
+        System.out.println("orderToMemberUserInfoHystrix线程池名称：" + Thread.currentThread().getName());
+        return memberServiceFeign.getUserInfo();
 
-
+    }
 }
 
 

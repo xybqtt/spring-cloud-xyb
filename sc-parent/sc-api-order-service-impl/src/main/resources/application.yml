@@ -43,14 +43,17 @@ eureka:
 feign:
   hystrix:
     enabled: true
-
-## hystrix禁止超时时间
 hystrix:
   command:
     default:
       execution:
         timeout:
+          ## hystrix禁止超时时间，生产环境不能设置为false
           enabled: false
+        isolation:
+          thread:
+            ## 设置超时时间
+            timeoutInMilliseconds: 4000
 
 ##设置feign客户端超时时间，sc feign默认支持ribbon
 ribbon:
