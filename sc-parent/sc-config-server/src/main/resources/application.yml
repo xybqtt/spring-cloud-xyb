@@ -17,6 +17,9 @@ spring:
           ## 读取此文件夹下面的配置文件
           search-paths:
           - config
+        native:
+          ### 读取本地的地址
+          search-locations: file:///D:/ProgramFiles/java/IntelliJ IDEA 2018.1.5/topWorkSpace/configFiles/config
       ## 读取的分支名称
       label: master
 server:

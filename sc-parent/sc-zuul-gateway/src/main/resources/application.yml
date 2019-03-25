@@ -4,21 +4,38 @@ eureka:
       ## 注册中心服务地址
       defaultZone: http://localhost:8100/eureka
 server:
-  port: 80
+  port: 82
 spring:
   application:
     ## 服务注册名称
     name: service-zuul
-zuul:
-  routes:
-    ## 定义转发服务规则，可随便定义
-    api-a:
-      ## 当客户端发送请求127.0.0.1:80/api-memer开头的请求时，网关会转发到member服务。
-      ## 例如：http://127.0.0.1:80/api-member/getMember
-      path: /zuul-member/**
-      ## 转发的服务名
-      serviceId: member
-    api-b:
-      path: /zuul-order/**
-      serviceId: order
+  cloud:
+    config:
+      ## 读取的版本环境
+      profile: dev
+      discovery:
+        ## 读取config-server环境，config-server的服务名
+        service-id: config-server
+        ## 开启读取权限
+        enabled: true
+## 开启所有监控中心接口
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+#zuul:
+#  routes:
+#    ## 定义转发服务规则，可随便定义
+#    api-a:
+#      ## 当客户端发送请求127.0.0.1:80/api-memer开头的请求时，网关会转发到member服务。
+#      ## 例如：http://127.0.0.1:80/api-member/getMember
+#      path: /zuul-member/**
+#      ## 转发的服务名
+#      serviceId: member
+#    api-b:
+#      path: /zuul-order/**
+#      serviceId: order
+### 如果增加微服务的话，不能每增加一个就重启一次zuul，所以使用actuator，使用手动或自动刷新，
+### 将zuul下面的粘贴到git仓库中去，当添加微服务时，更改git配置文件即可，注意启动类中要加个东西
 
