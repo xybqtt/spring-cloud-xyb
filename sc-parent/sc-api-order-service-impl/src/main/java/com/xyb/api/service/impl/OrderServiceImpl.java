@@ -6,16 +6,30 @@ import com.xyb.api.feign.MemberServiceFeign;
 import com.xyb.api.service.IOrderService;
 import com.xyb.base.BaseApiService;
 import com.xyb.base.entity.ResponseBase;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api("订单服务接口")
 public class OrderServiceImpl extends BaseApiService implements IOrderService {
 
     // 订单服务继承会员服务接口，用于实现feign客户端，减少重复接口代码
     @Autowired
     private MemberServiceFeign memberServiceFeign;
+
+    // 从swagger传递参数
+    @ApiOperation("订单服务信息")
+    @ApiImplicitParam(name = "userName", value = "用户信息参数", required = true, dataType = "String")
+    @PostMapping("/getOrder")
+    public String getOrder(String userName){
+        System.out.println("userName" + userName);
+        return "userName：" + userName;
+    }
 
     @RequestMapping("/orderToMember")
     public String orderToMember(String name) {

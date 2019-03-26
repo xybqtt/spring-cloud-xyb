@@ -20,6 +20,7 @@
         <module>common-utils</module>
         <module>sc-config-server</module>
         <module>sc-zuul-gateway</module>
+        <module>sc-swagger</module>
     </modules>
     <packaging>pom</packaging>
     <modelVersion>4.0.0</modelVersion>

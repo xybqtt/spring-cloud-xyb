@@ -1,0 +1,8 @@
+spring:
+  application:
+    ## 服务注册名称
+    name: swagger
+server:
+  port: 9090
+
+### 用此登陆http://ip:port/swagger-ui.html#/swagger-controller

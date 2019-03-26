@@ -61,6 +61,9 @@ ribbon:
   ReadTimeout: 5000
   # 指的是建立连接后从服务器读取到可用资源的时间
   ConnectTimeout: 5000
+## swagger的扫包范围
+swagger:
+  base-package: com.xyb.api.service.impl
 
 
 #feign的使用查看com.xyb.feign.MemberApiFeign
