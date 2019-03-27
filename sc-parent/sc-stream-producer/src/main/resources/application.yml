@@ -1,0 +1,12 @@
+server:
+  port: 8882
+spring:
+  application:
+    ## 服务注册名称，必须与git上的配置文件名的服务名称一样
+    name: test-configClient
+#####默认是本地配置
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: guest
+#    password: guest
